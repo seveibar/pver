@@ -1,6 +1,6 @@
-# `pragver` - A CLI for releasing pragmatic versions
+# `pver` - A CLI for releasing pragmatic versions
 
-`pragver` is a cli tool for releasing [Pragmatic Versions](https://pragmaticversioning.com).
+`pver` is a cli tool for releasing [Pragmatic Versions](https://pragmaticversioning.com).
 
 ## Installation
 
@@ -11,29 +11,31 @@ TODO
 ```bash
 # Automatically compute the latest Pragmatic Version using the
 # git history
-pragver analyze
+pver analyze
 
 # Automatically compute the latest Pragmatic Version using the
 # git history and release a new version as a git tag
-pragver release --git
+pver release --git
 
 # Automatically compute the latest Pragmatic Version using the
-# git history and increment the version in the package.json file
-pragver release --git --npm
+# git history and increment the version in the package.json file, and
+# the README.(md|txt) file
+pver release --git --npm --readme
 
-# Also available: --pyproject
+# Also available: --pyproject, --setuppy, --versionpy, --versionrb,
+#                 --mdfile somefile.md
 
 # Explicitly release a version
-pragver increment --git
-pragver announce --git
-pragver bigrelease --git
+pver increment --git
+pver announce --git
+pver bigrelease --git
 ```
 
 ## Git History Analysis
 
-### Pragver Simple Commit Message Standard
+### `pver` Simple Commit Message Standard v0.0.1
 
-By default, `pragver` uses parses commit history and looks for the following patterns:
+By default, `pver` uses parses commit history and looks for the following patterns:
 
 - `bigrelease: <message>` - A BIGRELEASE, increments the major/first version number
 - `announce: <message>` - A ANNOUNCE release, increments the minor/second version number
