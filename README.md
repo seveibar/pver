@@ -14,7 +14,7 @@ TODO
 pver analyze
 
 # Automatically compute the latest Pragmatic Version using the
-# git history and release a new version as a git tag
+# git history and release a new version as a git tag (and push it)
 pver release --git
 
 # Automatically compute the latest Pragmatic Version using the
@@ -26,9 +26,14 @@ pver release --git --npm --readme
 #                 --mdfile somefile.md
 
 # Explicitly release a version
-pver increment --git
-pver announce --git
-pver bigrelease --git
+pver release increment --git
+pver release announce --git
+pver release bigrelease --git
+
+# Automatically compute the latest Pragmatic Version using the
+# git history, tag the current commit and stage the changes locally
+pver stage --git
+pver stage increment --git --npm
 ```
 
 ## Git History Analysis
@@ -40,5 +45,11 @@ By default, `pver` uses parses commit history and looks for the following patter
 - `bigrelease: <message>` - A BIGRELEASE, increments the major/first version number
 - `announce: <message>` - A ANNOUNCE release, increments the minor/second version number
 - Anything else - An INCREMENT release, increments the patch/third version number
+
+`pver` then uses the largest version bump to determine the next version.
+
+To determine the current version, `pver` uses the version indicator of the
+supplied version providers in the order they were supplied, taking the first
+version that it finds. If no version provider was given, it defaults to `--git`.
 
 > Looking for a different commit analysis pattern? [Create an issue!](#)
