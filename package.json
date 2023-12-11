@@ -1,5 +1,18 @@
 {
   "name": "pver",
   "version": "0.0.2",
-  "repository": "git@github.com:seveibar/pver.git"
+  "repository": "git@github.com:seveibar/pver.git",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/yargs": "^17.0.32",
+    "bun-types": "latest",
+    "pkg": "^5.8.1"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "yargs": "^17.7.2"
+  }
 }
