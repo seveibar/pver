@@ -4,12 +4,15 @@
   "repository": "git@github.com:seveibar/pver.git",
   "module": "index.ts",
   "type": "module",
+  "scripts": {
+    "start": "esr ./cli.ts"
+  },
   "devDependencies": {
     "@types/yargs": "^17.0.32",
     "bun-types": "latest",
-    "pkg": "^5.8.1"
-  },
-  "peerDependencies": {
+    "esbuild": "^0.19.11",
+    "esbuild-runner": "^2.2.2",
+    "pkg": "^5.8.1",
     "typescript": "^5.0.0"
   },
   "dependencies": {

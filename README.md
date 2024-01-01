@@ -12,6 +12,7 @@ TODO
 # Automatically compute the latest Pragmatic Version using the
 # git history
 pver analyze
+pver analyze --current=package.json --transition=simple
 
 # Automatically compute the latest Pragmatic Version using the
 # git history and release a new version as a git tag (and push it)
@@ -36,9 +37,23 @@ pver stage --git
 pver stage increment --git --npm
 ```
 
-## Git History Analysis
+## Analysis
 
-### `pver` Simple Commit Message Standard v0.0.1
+Analysis has two steps. Getting the `current` state and using the `transition` to
+determine the next version. You can manually specify both the state method and
+the transition method.
+
+Usually, the `state` is automatically determined by trying any available methods.
+
+### `current` State Methods
+
+#### `package.json`
+
+Use the version of the package.json file.
+
+### Transition Methods
+
+#### `pver` Simple Commit Message Standard `simple`
 
 By default, `pver` uses parses commit history and looks for the following patterns:
 
@@ -46,10 +61,8 @@ By default, `pver` uses parses commit history and looks for the following patter
 - `announce: <message>` - A ANNOUNCE release, increments the minor/second version number
 - Anything else - An INCREMENT release, increments the patch/third version number
 
-`pver` then uses the largest version bump to determine the next version.
-
-To determine the current version, `pver` uses the version indicator of the
-supplied version providers in the order they were supplied, taking the first
-version that it finds. If no version provider was given, it defaults to `--git`.
+`pver` then uses the largest version bump to determine the next version. It will
+only increment a version number by a maximum of `1` per run. This means that
+intermediate commits are not released.
 
 > Looking for a different commit analysis pattern? [Create an issue!](#)
