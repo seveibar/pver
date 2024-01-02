@@ -21,7 +21,7 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "gitlog": "^4.0.8",
+    "simple-git": "^3.22.0",
     "yargs": "^17.7.2"
   }
 }

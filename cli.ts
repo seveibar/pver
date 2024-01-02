@@ -23,12 +23,13 @@ yargs(hideBin(process.argv))
       return yargs
         .option("current", {
           describe: "Method to compute the current version",
-          choices: ["package.json"],
-          default: "",
+          choices: ["auto", "package.json"],
+          default: "auto",
         })
         .option("transition", {
           describe: "Method to compute next version(s) from current version",
-          choices: ["simplegit"],
+          choices: ["auto", "simplegit"],
+          default: "auto",
         })
     },
     async (argv) => {
