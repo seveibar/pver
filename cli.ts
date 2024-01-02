@@ -1,5 +1,7 @@
 import yargs from "yargs"
 import { hideBin } from "yargs/helpers"
+import { getAppContext } from "./src/app-context"
+import { analyze } from "./src/analyze"
 
 interface ReleaseOptions {
   git?: boolean
@@ -17,9 +19,21 @@ yargs(hideBin(process.argv))
   .command(
     "analyze",
     "Automatically compute the latest Pragmatic Version using the git history",
-    {},
-    (argv) => {
-      // Logic for analyze command
+    (yargs) => {
+      return yargs
+        .option("current", {
+          describe: "Method to compute the current version",
+          choices: ["package.json"],
+          default: "",
+        })
+        .option("transition", {
+          describe: "Method to compute next version(s) from current version",
+          choices: ["simplegit"],
+        })
+    },
+    async (argv) => {
+      const analysis = await analyze(await getAppContext({ argv }))
+      console.log(analysis)
     }
   )
 

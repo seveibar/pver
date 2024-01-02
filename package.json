@@ -2,20 +2,26 @@
   "name": "pver",
   "version": "0.0.2",
   "repository": "git@github.com:seveibar/pver.git",
-  "module": "index.ts",
-  "type": "module",
   "scripts": {
-    "start": "esr ./cli.ts"
+    "cli": "esr ./cli.ts",
+    "test:analyze": "esr ./cli.ts analyze",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
+    "@seamapi/eslint-configs": "^0.0.4",
+    "@types/node": "^20.10.6",
     "@types/yargs": "^17.0.32",
-    "bun-types": "latest",
+    "@typescript-eslint/eslint-plugin": "^6.17.0",
+    "@typescript-eslint/parser": "^6.17.0",
     "esbuild": "^0.19.11",
     "esbuild-runner": "^2.2.2",
+    "eslint": "^8.56.0",
     "pkg": "^5.8.1",
-    "typescript": "^5.0.0"
+    "typescript": "^5.3.3"
   },
   "dependencies": {
+    "gitlog": "^4.0.8",
     "yargs": "^17.7.2"
   }
 }

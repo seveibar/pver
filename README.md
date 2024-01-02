@@ -12,7 +12,7 @@ TODO
 # Automatically compute the latest Pragmatic Version using the
 # git history
 pver analyze
-pver analyze --current=package.json --transition=simple
+pver analyze --current-method=package.json --transition-method=simple
 
 # Automatically compute the latest Pragmatic Version using the
 # git history and release a new version as a git tag (and push it)
@@ -39,23 +39,34 @@ pver stage increment --git --npm
 
 ## Analysis
 
-Analysis has two steps. Getting the `current` state and using the `transition` to
+Analysis has two steps. Getting the `current_version` and using the `transition_method` to
 determine the next version. You can manually specify both the state method and
 the transition method.
 
-Usually, the `state` is automatically determined by trying any available methods.
+Usually, the `current_version` is automatically determined by trying any available methods.
 
-### `current` State Methods
+### Current Version Methods (`--current-method`)
 
 #### `package.json`
 
-Use the version of the package.json file.
+Use the version inside the package.json file.
 
-### Transition Methods
+#### `readme`
 
-#### `pver` Simple Commit Message Standard `simple`
+Parse two sections of `README.txt` or `README.md` for a version number in the
+format `vX.Y.Z`. Here's an example of a README.md with a version number:
 
-By default, `pver` uses parses commit history and looks for the following patterns:
+```md
+# My Package v0.1.1
+
+This is a description of my package!
+```
+
+### Transition Methods (`--transition-method`)
+
+#### `pver` Simple Commit Message Standard `simplegit`
+
+By default, `pver` uses parses git commit history and looks for the following patterns:
 
 - `bigrelease: <message>` - A BIGRELEASE, increments the major/first version number
 - `announce: <message>` - A ANNOUNCE release, increments the minor/second version number
