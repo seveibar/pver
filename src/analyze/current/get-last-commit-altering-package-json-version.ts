@@ -14,6 +14,7 @@ export const getLastCommitAlteringPackageJsonVersion = async (
     // commits
     // Fetch history of main branch TODO detect main branch
     await git.fetch(["origin", "main", "--depth=30"])
+    log = await git.log({ file: "package.json" })
   }
 
   console.log(`Detected ${log.all.length} commits altering package.json`)

@@ -3,7 +3,9 @@
   "version": "0.0.7",
   "repository": "git@github.com:seveibar/pver.git",
   "main": "./dist/cli.js",
-  "bin": "./dist/cli.js",
+  "bin": {
+    "pver": "./dist/cli.js"
+  },
   "scripts": {
     "cli": "esr ./cli.ts",
     "test:analyze": "esr ./cli.ts analyze",
