@@ -5,6 +5,7 @@ export const addCommitChanges = async (
   new_version: string,
   ctx: AppContext
 ) => {
+  console.log("Adding files and committing changes")
   const git = simpleGit(ctx.current_directory)
 
   // TODO detect other version-impacted files

@@ -3,6 +3,7 @@ import { analyze } from "../analyze"
 import { AppContext } from "../app-context"
 import { updatePackageJson } from "./update-package-json"
 import { addCommitChanges } from "./add-commit-changes"
+import { makeSureGitConfigured } from "./make-sure-git-configured"
 
 export const stage = async (ctx: AppContext) => {
   const analysis = await analyze(ctx)
@@ -15,6 +16,8 @@ export const stage = async (ctx: AppContext) => {
   }
   console.log("")
   console.log(`Using staging methods: ${ctx.release_methods.join(", ")}`)
+
+  await makeSureGitConfigured(ctx)
 
   if (ctx.release_methods.includes("git")) {
     await makeGitTag(`v${analysis.next_version}`, ctx)
