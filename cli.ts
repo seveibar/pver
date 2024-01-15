@@ -2,6 +2,8 @@ import yargs from "yargs"
 import { hideBin } from "yargs/helpers"
 import { getAppContext } from "./src/app-context"
 import { analyze } from "./src/analyze"
+import { release } from "./src/release"
+import { stage } from "./src/stage"
 
 interface ReleaseOptions {
   git?: boolean
@@ -62,8 +64,9 @@ yargs(hideBin(process.argv))
         })
       // Additional options here...
     },
-    (argv: ReleaseOptions) => {
-      // Logic for release command
+    async (argv: ReleaseOptions) => {
+      const ctx = await getAppContext({ argv })
+      await release(ctx)
     }
   )
 
@@ -87,8 +90,9 @@ yargs(hideBin(process.argv))
         })
       // Additional options here...
     },
-    (argv: ReleaseOptions) => {
-      // Logic for stage command
+    async (argv: ReleaseOptions) => {
+      const ctx = await getAppContext({ argv })
+      await stage(ctx)
     }
   )
 

@@ -11,6 +11,7 @@
   "devDependencies": {
     "@seamapi/eslint-configs": "^0.0.4",
     "@types/node": "^20.10.6",
+    "@types/npmcli__package-json": "^4.0.3",
     "@types/yargs": "^17.0.32",
     "@typescript-eslint/eslint-plugin": "^6.17.0",
     "@typescript-eslint/parser": "^6.17.0",
@@ -21,6 +22,7 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
+    "@npmcli/package-json": "^5.0.0",
     "simple-git": "^3.22.0",
     "yargs": "^17.7.2"
   }
