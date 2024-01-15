@@ -3,6 +3,7 @@ import { AppContext } from "../app-context"
 import { stage } from "../stage"
 import { npmPublish } from "./npm-publish"
 import { pushGitTag } from "./push-git-tag"
+import { pushToMain } from "./push-to-main"
 
 export const release = async (ctx: AppContext) => {
   const analysis = await analyze(ctx)
@@ -15,4 +16,6 @@ export const release = async (ctx: AppContext) => {
   if (ctx.release_methods.includes("npm")) {
     await npmPublish(ctx)
   }
+
+  await pushToMain(ctx)
 }
