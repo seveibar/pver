@@ -12,13 +12,7 @@ export const getLastCommitAlteringPackageJsonVersion = async (
   // Return the hash of the first commit that changed the version line
   // To do this, you must load the commit diff for each commit
   for (const commit of log.all) {
-    const diff = await git.diff([
-      "-U0", // Don't show surrounding lines
-      log.latest.hash,
-      commit.hash,
-      "--",
-      "package.json",
-    ])
+    const diff = await git.show(["-U0", commit.hash, "--", "package.json"])
     if (diff.includes('"version":')) return commit.hash
   }
 
