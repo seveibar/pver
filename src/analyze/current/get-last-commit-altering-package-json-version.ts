@@ -6,6 +6,7 @@ export const getLastCommitAlteringPackageJsonVersion = async (
 ): Promise<string | null> => {
   const git = simpleGit(ctx.current_directory)
   const log = await git.log({ file: "package.json" })
+  console.log(`Detected ${log.all.length} commits altering package.json`)
 
   if (!log.latest) return null
 
