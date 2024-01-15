@@ -7,6 +7,11 @@ export const stage = async (ctx: AppContext) => {
   const analysis = await analyze(ctx)
   console.log(`current version: ${analysis.current_version}`)
   console.log(`next version: ${analysis.next_version}`)
+  if (analysis.current_version === analysis.next_version) {
+    throw new Error(
+      `Next version is the same as current version, not releasing. Check the transition method if you expected a version bump`
+    )
+  }
   console.log("")
   console.log(`Using staging methods: ${ctx.release_methods.join(", ")}`)
 
