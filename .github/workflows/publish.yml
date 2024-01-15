@@ -13,6 +13,6 @@ jobs:
         node-version: 20
     - run: npm ci
     - run: npm install -g pver
-    - run: npx pver release
+    - run: npm run cli -- release
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
