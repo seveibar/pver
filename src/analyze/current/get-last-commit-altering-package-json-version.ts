@@ -5,7 +5,17 @@ export const getLastCommitAlteringPackageJsonVersion = async (
   ctx: AppContext
 ): Promise<string | null> => {
   const git = simpleGit(ctx.current_directory)
-  const log = await git.log({ file: "package.json" })
+
+  let log = await git.log({ file: "package.json" })
+
+  if (log.all.length === 1) {
+    // Only one commit in the log usually means that we're on a github action
+    // with the checkout depth set to 1 (the default). Let's pull in some
+    // commits
+    // Fetch history of main branch TODO detect main branch
+    await git.fetch(["origin", "main", "--depth=30"])
+  }
+
   console.log(`Detected ${log.all.length} commits altering package.json`)
 
   if (!log.latest) return null
