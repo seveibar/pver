@@ -49,8 +49,8 @@ yargs(hideBin(process.argv))
       return yargs
         .positional("action", {
           describe: "The release action to perform",
-          default: "increment",
-          choices: ["increment", "announce", "bigrelease"],
+          default: "auto",
+          choices: ["auto", "increment", "announce", "bigrelease"],
         })
         .option("git", {
           describe: "Release as a git tag and push it",
@@ -80,8 +80,8 @@ yargs(hideBin(process.argv))
       return yargs
         .positional("action", {
           describe: "The stage action to perform",
-          default: "increment",
-          choices: ["increment", "announce", "bigrelease"],
+          default: "auto",
+          choices: ["auto", "increment", "announce", "bigrelease"],
         })
         .option("git", {
           describe: "Stage as a git tag",
