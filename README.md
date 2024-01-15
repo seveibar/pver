@@ -35,6 +35,9 @@ pver release bigrelease --git
 # git history, tag the current commit and stage the changes locally
 pver stage --git
 pver stage increment --git --npm
+
+# Setup a Github repository to automatically release with pragmatic versions
+pver setup github
 ```
 
 ## Analysis
