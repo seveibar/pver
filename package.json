@@ -1,12 +1,16 @@
 {
   "name": "pver",
-  "version": "0.0.2",
+  "version": "0.0.6",
   "repository": "git@github.com:seveibar/pver.git",
+  "main": "./dist/cli.js",
+  "bin": "./dist/cli.js",
   "scripts": {
     "cli": "esr ./cli.ts",
     "test:analyze": "esr ./cli.ts analyze",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "build": "tsup ./cli.ts",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "@seamapi/eslint-configs": "^0.0.4",
@@ -19,6 +23,7 @@
     "esbuild-runner": "^2.2.2",
     "eslint": "^8.56.0",
     "pkg": "^5.8.1",
+    "tsup": "^8.0.1",
     "typescript": "^5.3.3"
   },
   "dependencies": {

@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import yargs from "yargs"
 import { hideBin } from "yargs/helpers"
 import { getAppContext } from "./src/app-context"
@@ -48,6 +49,7 @@ yargs(hideBin(process.argv))
       return yargs
         .positional("action", {
           describe: "The release action to perform",
+          default: "increment",
           choices: ["increment", "announce", "bigrelease"],
         })
         .option("git", {
@@ -64,7 +66,7 @@ yargs(hideBin(process.argv))
         })
       // Additional options here...
     },
-    async (argv: ReleaseOptions) => {
+    async (argv) => {
       const ctx = await getAppContext({ argv })
       await release(ctx)
     }
@@ -78,7 +80,8 @@ yargs(hideBin(process.argv))
       return yargs
         .positional("action", {
           describe: "The stage action to perform",
-          choices: ["increment"],
+          default: "increment",
+          choices: ["increment", "announce", "bigrelease"],
         })
         .option("git", {
           describe: "Stage as a git tag",
@@ -88,9 +91,8 @@ yargs(hideBin(process.argv))
           describe: "Stage version in package.json",
           type: "boolean",
         })
-      // Additional options here...
     },
-    async (argv: ReleaseOptions) => {
+    async (argv) => {
       const ctx = await getAppContext({ argv })
       await stage(ctx)
     }
