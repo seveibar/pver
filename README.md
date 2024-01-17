@@ -40,6 +40,32 @@ pver stage increment --git --npm
 pver setup github
 ```
 
+### Usage in Github Actions
+
+Drop this into `.github/workflows/publish.yml`
+
+```yml
+name: Publish to npm
+on:
+  push:
+    branches:
+      - main
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 20
+        registry-url: https://registry.npmjs.org/
+    - run: npm install -g pver
+    - run: npm ci
+    - run: pver release
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+```
+
 ## Analysis
 
 Analysis has two steps. Getting the `current_version` and using the `transition_method` to
