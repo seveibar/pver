@@ -1,6 +1,6 @@
 {
   "name": "pver",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "repository": "git@github.com:seveibar/pver.git",
   "main": "./dist/cli.js",
   "bin": {
