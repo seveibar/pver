@@ -96,6 +96,4 @@ yargs(hideBin(process.argv))
       const ctx = await getAppContext({ argv })
       await stage(ctx)
     }
-  )
-
-  .help().argv
+  ).argv
