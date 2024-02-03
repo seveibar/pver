@@ -2,6 +2,8 @@ import { AppContext } from "../app-context"
 import { getCurrentPackageJsonVersion } from "./current/get-current-package-json-version"
 import { getLastCommitAlteringPackageJsonVersion } from "./current/get-last-commit-altering-package-json-version"
 import { getSimpleGitTransitions } from "./transition/get-simple-git-transitions"
+import { checkIfGitTagExistsForVersion } from "./current/check-if-git-tag-exists-for-version"
+import { getNextVersion } from "./transition/get-next-version"
 
 export type Analysis = {
   current_method: string
@@ -34,7 +36,7 @@ export const analyze = async (ctx: AppContext): Promise<Analysis> => {
     )
 
   let next_version
-  if (transition_method === "simplegit")
+  if (transition_method === "simplegit") {
     next_version = await getSimpleGitTransitions(
       {
         current_version,
@@ -42,6 +44,24 @@ export const analyze = async (ctx: AppContext): Promise<Analysis> => {
       },
       ctx
     )
+    if (next_version !== current_version) {
+      for (
+        let i = 0;
+        i < 2 && (await checkIfGitTagExistsForVersion(ctx, next_version));
+        i++
+      ) {
+        console.log(
+          `Next version already exists as a git tag: ${next_version}. Incrementing version by an increment.`
+        )
+        next_version = getNextVersion(next_version, "increment")
+      }
+    }
+
+    if (await checkIfGitTagExistsForVersion(ctx, next_version))
+      throw new Error(
+        `Next version already exists as a git tag: ${next_version}. We tried to incremenet twice but the tag still exists. Consider deleting some git tags`
+      )
+  }
 
   if (!next_version)
     throw new Error(
