@@ -4,7 +4,9 @@
 
 ## Installation
 
-TODO
+```bash
+npm install -g pver
+```
 
 ## Usage
 
