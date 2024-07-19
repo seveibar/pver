@@ -5,11 +5,18 @@ export const makeSureGitConfigured = async (ctx: AppContext) => {
   console.log("Making sure git is configured...")
   const git = simpleGit(ctx.current_directory)
 
-  // TODO detect if there's an existing git configuration
-  if (process.env.GITHUB_ACTIONS) {
-    await git.addConfig("user.email", "actions@github.com", undefined, "local")
-    await git.addConfig("user.name", "GitHub Actions", undefined, "local")
+  const user_email =
+    process.env.GIT_USER_EMAIL ||
+    (process.env.GITHUB_ACTIONS ? "actions@github.com" : undefined)
+  const user_name =
+    process.env.GIT_USER_NAME ||
+    (process.env.GITHUB_ACTIONS ? "GitHub Actions" : undefined)
+
+  if (user_email) {
+    await git.addConfig("user.email", user_email, undefined, "local")
   }
 
-  // TODO error if nothing configured
+  if (user_name) {
+    await git.addConfig("user.name", user_name, undefined, "local")
+  }
 }
