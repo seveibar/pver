@@ -1,11 +1,35 @@
 # `pver` - A CLI for releasing pragmatic versions
 
-`pver` is a cli tool for releasing [Pragmatic Versions](https://pragmaticversioning.com).
+`pver` is a cli tool for releasing [Pragmatic Versions](https://pragmaticversioning.com)
 
 ## Installation
 
 ```bash
 npm install -g pver
+```
+
+Then put this in a github workflow:
+
+```yml
+name: Publish to npm
+on:
+  push:
+    branches:
+      - main
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org/
+      - run: npm install -g pver
+      - run: npm ci
+      - run: pver release
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 ```
 
 ## Usage
