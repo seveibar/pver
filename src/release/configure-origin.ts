@@ -13,10 +13,12 @@ export const configureOrigin = async (git: any) => {
     }
 
     if (!remote_url.includes("oauth2:")) {
-      const new_url = remote_url!.replace(
-        "https://",
-        `https://oauth2:${process.env.GITHUB_TOKEN.trim()}@`
-      )
+      const new_url = remote_url!
+        .replace(
+          "https://",
+          `https://oauth2:${process.env.GITHUB_TOKEN.trim()}@`
+        )
+        .replace(/\n/g, "")
       await git.removeRemote("origin")
       await git.addRemote("origin", new_url)
     }
