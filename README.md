@@ -1,6 +1,8 @@
 # `pver` - A CLI for releasing pragmatic versions
 
-`pver` is a cli tool for releasing [Pragmatic Versions](https://pragmaticversioning.com)
+`pver` is a cli tool for releasing [Pragmatic Versions](https://pragmaticversioning.com). You can use
+`pver` as a simpler alternative to `semantic-release` for `npm` repositories. Alternatively if you already
+use `semantic-release`, you can use a [pragmatic versioning release config](https://github.com/tscircuit/plop/blob/main/template-files/release.config.js)
 
 ## Installation
 
