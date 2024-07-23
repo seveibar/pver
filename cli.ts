@@ -21,6 +21,12 @@ if (process.env.NPM_TOKEN && !process.env.NODE_AUTH_TOKEN) {
   process.env.NODE_AUTH_TOKEN = process.env.NPM_TOKEN
 }
 
+const handleCommandError = (e: any) => {
+  console.error(e.stack)
+  console.error(e.toString())
+  process.exit(1)
+}
+
 yargs(hideBin(process.argv))
   // Analyze Command
   .command(
@@ -40,7 +46,9 @@ yargs(hideBin(process.argv))
         })
     },
     async (argv) => {
-      const analysis = await analyze(await getAppContext({ argv }))
+      const analysis = await analyze(await getAppContext({ argv })).catch(
+        handleCommandError
+      )
       console.log(analysis)
     }
   )
@@ -72,7 +80,7 @@ yargs(hideBin(process.argv))
     },
     async (argv) => {
       const ctx = await getAppContext({ argv })
-      await release(ctx)
+      await release(ctx).catch(handleCommandError)
     }
   )
 
@@ -98,6 +106,6 @@ yargs(hideBin(process.argv))
     },
     async (argv) => {
       const ctx = await getAppContext({ argv })
-      await stage(ctx)
+      await stage(ctx).catch(handleCommandError)
     }
   ).argv
