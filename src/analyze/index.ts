@@ -44,12 +44,11 @@ export const analyze = async (ctx: AppContext): Promise<Analysis> => {
       },
       ctx
     )
+    console.log(`current version: ${current_version}`)
+    console.log(`candidate next version: ${next_version}`)
     if (next_version !== current_version) {
-      for (
-        let i = 0;
-        i < 10 && (await checkIfGitTagExistsForVersion(ctx, next_version));
-        i++
-      ) {
+      for (let i = 0; i < 10; i++) {
+        if (!(await checkIfGitTagExistsForVersion(ctx, next_version))) break
         console.log(
           `Next version already exists as a git tag: ${next_version}. Incrementing version by an increment.`
         )
