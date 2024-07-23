@@ -46,6 +46,10 @@ export const analyze = async (ctx: AppContext): Promise<Analysis> => {
     )
     console.log(`current version: ${current_version}`)
     console.log(`candidate next version: ${next_version}`)
+    if (next_version === current_version) {
+      console.log("No changes detected, exiting")
+      process.exit(0)
+    }
     if (next_version !== current_version) {
       for (let i = 0; i < 10; i++) {
         if (!(await checkIfGitTagExistsForVersion(ctx, next_version))) break
