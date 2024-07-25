@@ -12,6 +12,13 @@ export const getSimpleGitTransitions = async (
   const git = simpleGit(ctx.current_directory)
   const log = await git.log()
   if (!log.latest) throw new Error("No git history (commit something!)")
+  
+  // Check if the last commit contains [norelease]
+  if (log.latest.message.includes('[norelease]')) {
+    console.log('Last commit contains [norelease], skipping version increment')
+    return current_version
+  }
+  
   if (log.latest && log.latest.hash === current_version_commit_sha)
     return current_version
   const logs_since_current = []
