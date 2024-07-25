@@ -4,6 +4,20 @@
 `pver` as a simpler alternative to `semantic-release` for `npm` repositories. Alternatively if you already
 use `semantic-release`, you can use a [pragmatic versioning release config](https://github.com/tscircuit/plop/blob/main/template-files/release.config.js)
 
+Pragmatic versioning optimizes for communicating changes to a package to package consumers,
+while retaining simple semantics for package maintainers.
+
+Given a version number BIGRELEASE.ANNOUNCE.INCREMENT, increment the:
+
+- BIGRELEASE version whenever a major milestone, periodic version cut (e.g.
+a yearly release) or other marketed version change occurs, a BIGRELEASE
+is often accompanied with a maintanence period.
+- ANNOUNCE version whenever you have made an substantial incompatible API change,
+introduced a new set of features, or any change that an end user using the software
+normally may notice and should accompany an announcement.
+- INCREMENT version for any new project contribution.
+
+
 ## Installation
 
 ```bash
