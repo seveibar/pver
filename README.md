@@ -4,6 +4,9 @@
 `pver` as a simpler alternative to `semantic-release` for `npm` repositories. Alternatively if you already
 use `semantic-release`, you can use a [pragmatic versioning release config](https://github.com/tscircuit/plop/blob/main/template-files/release.config.js)
 
+> [!WARNING]
+> This repo has been moved to [tscircuit/pver](https://github.com/tscircuit/pver)
+
 Pragmatic versioning optimizes for communicating changes to a package to package consumers,
 while retaining simple semantics for package maintainers.
 
